@@ -11,6 +11,26 @@ public class Primes {
         return true;
     }
 
+    public static int gcdPrime(int a ,int b) {
+        int m = Math.max(a, b);
+        int n = Math.min(a, b);
+        int r = m % n;
+        while (r != 0) {
+            m = n;
+            n = r;
+            r = m % n;
+        }
+        int i = 2;
+        while (!isPrime(n)) {
+            if (n % i == 0) {
+                n = n / i;
+            } else {
+                i = nextPrime(i);
+            }
+        }
+        return n;
+    }
+
     public static Vector<Integer> primeLiquidation(int num) {
         int i = 2;
         Vector<Integer> v = new Vector<Integer>();
@@ -169,16 +189,18 @@ public class Primes {
     }
 
     public static void main(String[] args) {
-        HashMap<Integer ,Vector<Integer>> vm = dictionaryPrimes(1024);
+        HashMap<Integer ,Vector<Integer>> vm = dictionaryPrimes(2048);
         for(int key: vm.keySet())
             System.out.println(key + " = " + vm.get(key));
         System.out.println();
-        Vector<Integer> v = primeLiquidation(24);
-        System.out.println(v);
-        System.out.println();
+//        Vector<Integer> v = primeLiquidation(24);
+//        System.out.println(v);
+//        System.out.println();
         treeCommotative(24);
         System.out.println();
-        int t = sequenceNonPrime(12,24);
-        System.out.println(t);
+//        int t = sequenceNonPrime(12,24);
+//        System.out.println(t);
+        int k = gcdPrime(6,12);
+        System.out.println(k);
     }
 }
